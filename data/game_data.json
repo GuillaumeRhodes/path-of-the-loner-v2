@@ -1,0 +1,85 @@
+{
+  "heroes": {
+    "1": {
+      "name": "Warrior",
+      "hp": 120,
+      "attack": 15,
+      "defense": 10,
+      "class": "Warrior"
+    },
+    "2": {
+      "name": "Archer",
+      "hp": 100,
+      "attack": 18,
+      "defense": 5,
+      "class": "Archer"
+    },
+    "3": {
+      "name": "Mage",
+      "hp": 80,
+      "attack": 20,
+      "defense": 3,
+      "class": "Mage"
+    }
+  },
+  "weapons": {
+    "1": { "name": "Iron Sword", "power": 10 },
+    "2": { "name": "Wooden Bow", "power": 8 },
+    "3": { "name": "Magic Staff", "power": 12 }
+  },
+  "armors": {
+    "1": { "name": "Leather Armor", "defense": 5 },
+    "2": { "name": "Iron Shield", "defense": 7 },
+    "3": { "name": "Mage Robe", "defense": 3 }
+  },
+  "monsters": {
+    "1": {
+      "name": "Goblin",
+      "hp": 30,
+      "attack": 5,
+      "defense": 2,
+      "type": "normal",
+      "class": "NormalMonster"
+    },
+    "2": {
+      "name": "Slime",
+      "hp": 25,
+      "attack": 4,
+      "defense": 1,
+      "type": "normal",
+      "class": "NormalMonster"
+    },
+    "3": {
+      "name": "Orc",
+      "hp": 50,
+      "attack": 10,
+      "defense": 5,
+      "type": "elite",
+      "class": "EliteMonster"
+    },
+    "4": {
+      "name": "Troll",
+      "hp": 60,
+      "attack": 12,
+      "defense": 6,
+      "type": "elite",
+      "class": "EliteMonster"
+    },
+    "5": {
+      "name": "Dragon",
+      "hp": 100,
+      "attack": 20,
+      "defense": 10,
+      "type": "boss",
+      "class": "BossMonster"
+    },
+    "6": {
+      "name": "Demon King",
+      "hp": 120,
+      "attack": 25,
+      "defense": 12,
+      "type": "boss",
+      "class": "BossMonster"
+    }
+  }
+}
