@@ -34,7 +34,6 @@ def combatPvp(hero1, hero2):
     print(f"Player 2 starts with {hero2.hp} HP, {hero2.attack} Attack, {hero2.defense} Defense")
     print(f"Player 2 is equipped with {hero2.weapon.name} and {hero2.armor.name}")
 
-    # Détermine qui attaque en premier
     if isinstance(hero1, Archer):
         first, first_role = hero1, "Player 1"
         second, second_role = hero2, "Player 2"
@@ -47,11 +46,9 @@ def combatPvp(hero1, hero2):
 
     print(f"\n{first_role} ({first.name}) attacks first!")
 
-    # Combat
     while first.hp > 0 and second.hp > 0:
-        # Premier héros attaque
         print(f"\n{first_role} ({first.name}), it's your turn!")
-        first.attack_target(second, first_role)  # Ajout du rôle pour les mages
+        first.attack_target(second, first_role)  
         if second.hp <= 0:
             print(f"{second_role} ({second.name}) is defeated!")
             break
@@ -60,9 +57,8 @@ def combatPvp(hero1, hero2):
         print(f"{second_role} ({second.name}) HP: {second.hp}")
         input("\nPress Enter to continue...")
 
-        # Second héros attaque
         print(f"\n{second_role} ({second.name}), it's your turn!")
-        second.attack_target(first, second_role)  # Ajout du rôle pour les mages
+        second.attack_target(first, second_role)  
         if first.hp <= 0:
             print(f"{first_role} ({first.name}) is defeated!")
             break

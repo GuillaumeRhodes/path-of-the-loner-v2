@@ -20,7 +20,6 @@ class Character:
         return self.base_defense + (self.armor.defense if self.armor else 0)
 
     def attack_target(self, target, role=None):
-        """Effectue une attaque contre une cible."""
         damage = max(0, self.attack - target.defense)
         target.hp -= damage
         if role:
@@ -42,7 +41,7 @@ class Archer(Character):
         super().__init__(name, hp, attack, defense)
         self.dodge_rate = 0.25
 
-    def attack_target(self, target):
+    def attack_target(self, target, role=None):
         print(f"{self.name} attacks first!")
         super().attack_target(target)
 
@@ -51,7 +50,7 @@ class Archer(Character):
 
 
 class Warrior(Character):
-    def attack_target(self, target):
+    def attack_target(self, target, role=None):
         print(f"{self.name} (Warrior) attacks twice!")
         super().attack_target(target)
         if target.hp > 0:
