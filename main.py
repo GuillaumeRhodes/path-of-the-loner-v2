@@ -10,16 +10,16 @@ def main():
     while True:
         print("\n=== Path of the Loner ===")
         mode = main_menu()
-        if mode == "PvE":
+        if mode == "JcE":
             hero = choose_hero()
             choose_equipment(hero)
             pve_mode(hero)
-        elif mode == "PvP":
+        elif mode == "JcJ":
             pvp_mode()
         
-        replay = input("\nDo you want to play again? (y/n): ").lower()
-        if replay != "y":
-            print("Thanks for playing!")
+        replay = input("\nVoulez vous rejouer? (o/n): ").lower()
+        if replay != "o":
+            print("Merci d'avoir joué!")
             break
 
 if __name__ == "__main__":

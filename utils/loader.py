@@ -7,11 +7,11 @@ def choose_hero():
     db = TinyDB("data/game_data.json")
     heroes_data = db.table("heroes").all()
 
-    print("\n=== Choose Your Hero ===")
+    print("\n=== Choix de la classe ===")
     for idx, hero in enumerate(heroes_data):
         print(f"{idx + 1}. {hero['name']} - HP: {hero['hp']}, Attack: {hero['attack']}, Defense: {hero['defense']}")
 
-    choice = int(input("Select your hero (1/2/3): ")) - 1
+    choice = int(input("Sélectionnez la classe que vous souhaitez jouer (1/2/3): ")) - 1
     selected_hero = heroes_data[choice]
 
     hero_class = globals()[selected_hero["class"]]
@@ -21,14 +21,14 @@ def choose_hero():
 def choose_equipment(hero):
     db = TinyDB("data/game_data.json")
 
-    print("\n=== Choose Your Weapon ===")
+    print("\n=== Choisissez votre arme ===")
     weapons = db.table("weapons").all()
     for idx, weapon in enumerate(weapons):
         print(f"{idx + 1}. {weapon['name']} (Power: {weapon['power']})")
     weapon_choice = int(input("Select your weapon: ")) - 1
     hero.equip_weapon(Weapon(**weapons[weapon_choice]))
 
-    print("\n=== Choose Your Armor ===")
+    print("\n=== Choisissez votre armure ===")
     armors = db.table("armors").all()
     for idx, armor in enumerate(armors):
         print(f"{idx + 1}. {armor['name']} (Defense: {armor['defense']})")
@@ -37,7 +37,6 @@ def choose_equipment(hero):
 
 
 def generate_random_hero():
-    """Génère un héros aléatoire depuis TinyDB."""
     db = TinyDB("data/game_data.json")
     heroes_data = db.table("heroes").all()
     weapons_data = db.table("weapons").all()

@@ -2,17 +2,17 @@ from utils.loader import choose_hero, choose_equipment, generate_random_hero
 from game.combat import combatPvp
 
 def pvp_mode():
-    print("\n=== PvP Mode ===")
+    print("\n=== Mode JcJ ===")
     
-    print("Player 1, choose your hero and equipment.")
+    print("Joueur 1, choisissez votre équipement.")
     player1 = choose_hero()
     choose_equipment(player1)
 
     player2 = generate_random_hero()
-    print(f"Player 2 chose {player2.name}!")
-    print(f"Player 2 is equipped with {player2.weapon.name} and {player2.armor.name}.")
+    print(f"Le Joueur 2 sélectionne un {player2.name}!")
+    print(f"Le Joueur 2 s'équipe avec {player2.weapon.name} et {player2.armor.name}.")
     
-    input("\nPress Enter to start the combat...")
+    input("\nAppuyez sur Entrer pour commencer le combat...")
 
     combatPvp(player1, player2)
 

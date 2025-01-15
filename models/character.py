@@ -8,6 +8,8 @@ class Character:
         self.base_defense = base_defense
         self.weapon = None
         self.armor = None
+        self.role = role
+        
 
     @property
     def attack(self):
@@ -19,13 +21,13 @@ class Character:
         # défense de base + bonus d'armure
         return self.base_defense + (self.armor.defense if self.armor else 0)
 
-    def attack_target(self, target, role=None):
+    def attack_target(self, target):
         damage = max(0, self.attack - target.defense)
         target.hp -= damage
-        if role:
-            print(f"{role} ({self.name}) attacks {target.name} for {damage} damage!")
-        else:
-            print(f"{self.name} attacks {target.name} for {damage} damage!")
+
+        role_display = self.role
+        print(f"{role_display} ({self.name}) attaque son adversaire et inflige {damage} dégats!")
+
 
     def equip_weapon(self, weapon):
         self.weapon = weapon
@@ -37,47 +39,56 @@ class Character:
         
 
 class Archer(Character):
-    def __init__(self, name, hp, attack, defense):
+    def __init__(self, name, hp, attack, defense, role=None):
         super().__init__(name, hp, attack, defense)
         self.dodge_rate = 0.25
+        self.role = role if role else "Unknown Role"
 
     def attack_target(self, target, role=None):
-        print(f"{self.name} attacks first!")
+        print(f"{self.role} (Archer) attacks first!")
         super().attack_target(target)
 
     def dodge(self):
+        print(f"{self.role} (Archer) dodges the attack!")
         return random.random() < self.dodge_rate
 
 
 class Warrior(Character):
-    def attack_target(self, target, role=None):
-        print(f"{self.name} (Warrior) attacks twice!")
+    def __init__(self, name, hp, attack, defense, role=None):
+        super().__init__(name, hp, attack, defense)
+        self.role = role if role else "Unknown Role"
+        
+    def attack_target(self, target):
+        print(f"{self.role} (Guerrier) attaque deux fois!")
         super().attack_target(target)
         if target.hp > 0:
             super().attack_target(target)
 
 
+
 class Mage(Character):
     DEFAULT_MANA = 50
-    
-    def __init__(self, name, hp, attack, defense):
+
+    def __init__(self, name, hp, attack, defense, role=None):
         super().__init__(name, hp, attack, defense)
         self.mana = Mage.DEFAULT_MANA
+        self.role = role if role else "Unknown Role"
 
     def cast_spell(self, target, spell_cost, spell_damage):
         if self.mana >= spell_cost:
             self.mana -= spell_cost
             damage = max(0, spell_damage - target.defense)
             target.hp -= damage
-            print(f"{self.name} (Mage) casts a spell on {target.name} for {damage} damage!")
+            print(f"{self.role} (Mage) lance un sort sur {target.name} et inflige {damage} dégâts!")
         else:
-            print(f"{self.name} doesn't have enough mana to cast the spell!")
+            print(f"{self.role} (Mage) n'a pas assez de mana pour lancer le sort!")
 
-    def attack_target(self, target, role=None):
-        choice = input(f"{role} ({self.name}), do you want to (A)ttack or (C)ast a spell? ").lower()
-        if choice == "c":
+    def attack_target(self, target):
+        choice = input(f"{self.role} (Mage), voulez-vous (A)ttaquer ou (L)ancer un sort? ").lower()
+        if choice == "l":
             self.cast_spell(target, spell_cost=10, spell_damage=30)
         else:
             super().attack_target(target)
+
 
 

@@ -20,8 +20,10 @@ def get_random_monster(zone_type):
         ])
 
 def explore_zone(hero, zone_type):
-    input(f"\nPress Enter to enter {zone_type.capitalize()} Zone...")
-    print(f"\nEntering {zone_type.capitalize()} Zone...")
+    input(f"\nAppuyez sur Entrée pour entrer dans la zone {zone_type.capitalize()}...")
+    print(f"\nEntrée dans la zone {zone_type.capitalize()}...")
     monster = get_random_monster(zone_type)
-    print(monster)
+    print(f"Vous rencontrez un {monster.name} !")
+    input("Appuyez sur Entrée pour commencer le combat...")
     combatPve(hero, monster)
+
