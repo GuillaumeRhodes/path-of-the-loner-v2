@@ -40,6 +40,8 @@ def combatPve(hero, monster, screen, font, background_image_path):
                     damage = max(0, hero.attack - monster.defense)
                     hero.attack_target(monster)
                     messages.append(f"{hero.name} inflige {damage} dégâts à {monster.name}.")
+                    if hero.name == "Guerrier":
+                        messages.append(f"{hero.name} inflige {damage} dégâts à {monster.name}.")
 
                     if monster.hp <= 0:
                         messages.append(f"Vous avez battu {monster.name} !")
