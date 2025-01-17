@@ -8,18 +8,18 @@ class Monster(Entity):
     def attack_target(self, target):
         damage = max(0, self.attack - target.defense)
         target.hp -= damage
-        print(f"{self.name} attacks {target.name} for {damage} damage!")
+        print(f"{self.name} attaque {target.name} et lui fait {damage} dégats!")
 
 class NormalMonster(Monster):
     def special_ability(self):
-        print(f"{self.name} has no special ability.")
+        print(f"{self.name} n'a pas de coméptence spéciale.")
 
 class EliteMonster(Monster):
     def special_ability(self):
-        print(f"{self.name} deals extra damage!")
+        print(f"{self.name} fais des dégats accrus!")
         self.attack += 5
 
 class BossMonster(Monster):
     def special_ability(self):
-        print(f"{self.name} regenerates health!")
+        print(f"{self.name} régénère ses PV!")
         self.hp += 10

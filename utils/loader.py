@@ -9,7 +9,7 @@ def choose_hero():
 
     print("\n=== Choix de la classe ===")
     for idx, hero in enumerate(heroes_data):
-        print(f"{idx + 1}. {hero['name']} - HP: {hero['hp']}, Attack: {hero['attack']}, Defense: {hero['defense']}")
+        print(f"{idx + 1}. {hero['name']} - PV: {hero['hp']}, Attaque: {hero['attack']}, Défense: {hero['defense']}")
 
     choice = int(input("Sélectionnez la classe que vous souhaitez jouer (1/2/3): ")) - 1
     selected_hero = heroes_data[choice]
@@ -18,22 +18,15 @@ def choose_hero():
     return hero_class(selected_hero["name"], selected_hero["hp"], selected_hero["attack"], selected_hero["defense"])
 
 
-def choose_equipment(hero):
+def load_weapons():
+    """Load weapons from the game data JSON file."""
     db = TinyDB("data/game_data.json")
+    return db.table("weapons").all()
 
-    print("\n=== Choisissez votre arme ===")
-    weapons = db.table("weapons").all()
-    for idx, weapon in enumerate(weapons):
-        print(f"{idx + 1}. {weapon['name']} (Power: {weapon['power']})")
-    weapon_choice = int(input("Select your weapon: ")) - 1
-    hero.equip_weapon(Weapon(**weapons[weapon_choice]))
-
-    print("\n=== Choisissez votre armure ===")
-    armors = db.table("armors").all()
-    for idx, armor in enumerate(armors):
-        print(f"{idx + 1}. {armor['name']} (Defense: {armor['defense']})")
-    armor_choice = int(input("Select your armor: ")) - 1
-    hero.equip_armor(Armor(**armors[armor_choice]))
+def load_armors():
+    """Load armors from the game data JSON file."""
+    db = TinyDB("data/game_data.json")
+    return db.table("armors").all()
 
 
 def generate_random_hero():

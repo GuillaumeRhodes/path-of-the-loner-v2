@@ -57,6 +57,8 @@ class Warrior(Character):
     def __init__(self, name, hp, attack, defense, role=None):
         super().__init__(name, hp, attack, defense)
         self.role = role if role else "Unknown Role"
+        self.class_name = "warrior"
+
         
     def attack_target(self, target):
         print(f"{self.role} (Guerrier) attaque deux fois!")

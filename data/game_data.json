@@ -1,7 +1,7 @@
 {
   "heroes": {
     "1": {
-      "name": "Warrior",
+      "name": "Guerrier",
       "hp": 120,
       "attack": 15,
       "defense": 10,
@@ -23,18 +23,18 @@
     }
   },
   "weapons": {
-    "1": { "name": "Iron Sword", "power": 10 },
-    "2": { "name": "Wooden Bow", "power": 8 },
-    "3": { "name": "Magic Staff", "power": 12 }
+    "1": { "name": "\u00c9p\u00e9e en fer", "power": 10 },
+    "2": { "name": "Arc en bois", "power": 8 },
+    "3": { "name": "B\u00e2ton magique", "power": 12 }
   },
   "armors": {
-    "1": { "name": "Leather Armor", "defense": 5 },
-    "2": { "name": "Iron Shield", "defense": 7 },
-    "3": { "name": "Mage Robe", "defense": 3 }
+    "1": { "name": "Armure en cuir", "defense": 5 },
+    "2": { "name": "Bouclier en fer", "defense": 7 },
+    "3": { "name": "Robe de mage", "defense": 3 }
   },
   "monsters": {
     "1": {
-      "name": "Goblin",
+      "name": "Gobelin",
       "hp": 30,
       "attack": 5,
       "defense": 2,
@@ -50,7 +50,7 @@
       "class": "NormalMonster"
     },
     "3": {
-      "name": "Orc",
+      "name": "Orque",
       "hp": 50,
       "attack": 10,
       "defense": 5,
@@ -74,7 +74,7 @@
       "class": "BossMonster"
     },
     "6": {
-      "name": "Demon King",
+      "name": "Roi D\u00e9mon",
       "hp": 120,
       "attack": 25,
       "defense": 12,

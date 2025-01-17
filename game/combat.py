@@ -1,35 +1,72 @@
 from models.character import Archer
 from models.character import Mage
+import pygame
+from game.constants import WHITE, BLACK
+from game.screens.combat_screen import draw_combat_screen, draw_attack_button, draw_next_zone_button
 
-def combatPve(hero, monster):
-    """Handles PvE combat between a hero and a monster."""
-    hero.role = "Joueur 1"
+def combatPve(hero, monster, screen, font, background_image_path):
+    """
+    Handles PvE combat between a hero and a monster with a styled background and a scrollable message console.
+    """
+    running = True
+    player_turn = True
+    messages = ["Le combat commence !"]  # Initial message
+    monster_defeated = False
+    last_monster_attack_time = 0  # Timing for monster's attack delay
+    scroll_offset = 0  # Initial scroll position
 
-    print(f"\nLe combat commence! {hero.role} ({hero.name}) vs {monster.name}")
+    while running:
+        # Draw the combat screen with the updated messages
+        max_offset = draw_combat_screen(hero, monster, messages, screen, font, background_image_path, scroll_offset)
 
-    monster.special_ability()
+        # Draw buttons
+        attack_button = draw_attack_button(screen, font, player_turn, monster_defeated)
+        next_zone_button = draw_next_zone_button(screen, font, monster_defeated)
 
-    while hero.hp > 0 and monster.hp > 0:
-        print(f"\n{hero.role} ({hero.name}), c'est à vous d'attaquer!")
-        input("\nC'est à votre tour d'attaquer, appuyez sur Entrer......")
-        hero.attack_target(monster)
-        if monster.hp <= 0:
-            print(f"{monster.name} est battu!")
-            break
-        print(f"\n{hero.role} ({hero.name}) HP: {hero.hp}")
-        print(f"{monster.name} HP: {monster.hp}")
-        input("\nC'est au tour du Monstre d'attaquer, appuyez sur Entrer...")
-        
-        
-        print(f"\n{monster.name} contre-attaque!")
-        monster.attack_target(hero)
-        if hero.hp <= 0:
-            print(f"{hero.role} ({hero.name}) est battu!")
-            break
+        pygame.display.flip()
 
-        print(f"\n{hero.role} ({hero.name}) HP: {hero.hp}")
-        print(f"{monster.name} HP: {monster.hp}")
-        input("\nAppuyez sur Entrer pour continuer...")
+        # Handle events
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if monster_defeated and next_zone_button and next_zone_button.collidepoint(event.pos):
+                    messages.append("Vous passez à la zone suivante.")
+                    return
+
+                if player_turn and not monster_defeated and attack_button and attack_button.collidepoint(event.pos):
+                    damage = max(0, hero.attack - monster.defense)
+                    hero.attack_target(monster)
+                    messages.append(f"{hero.name} inflige {damage} dégâts à {monster.name}.")
+
+                    if monster.hp <= 0:
+                        messages.append(f"Vous avez battu {monster.name} !")
+                        monster_defeated = True
+                        break
+
+                    player_turn = False
+                    last_monster_attack_time = pygame.time.get_ticks()
+
+            if event.type == pygame.MOUSEWHEEL:
+                # Adjust scroll offset with the mouse wheel
+                scroll_offset = max(0, min(scroll_offset - event.y, max_offset))
+
+        # Monster's turn after a delay of 2 seconds
+        if not player_turn and not monster_defeated and pygame.time.get_ticks() - last_monster_attack_time >= 2000:
+            damage = max(0, monster.attack - hero.defense)
+            monster.attack_target(hero)
+            messages.append(f"{monster.name} inflige {damage} dégâts à {hero.name}.")
+
+            if hero.hp <= 0:
+                messages.append(f"{hero.name} est battu !")
+                running = False
+                break
+
+            player_turn = True
+
+
 
 
 

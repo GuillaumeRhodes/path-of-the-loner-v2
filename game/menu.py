@@ -1,5 +1,5 @@
 def main_menu():
-    print("=== Main Menu ===")
+    print("=== Menu Principal ===")
     print("1. Joueur contre Environnement (JcE)")
     print("2. Joueur contre Joueur (JcJ)")
     choice = input("Choisissez votre mode (JcJ/JcE): ")
