@@ -25,7 +25,7 @@ def draw_combat_screen(hero, monster, messages, screen, font, background_image_p
     screen.blit(background, (0, 0))
 
     # Load hero and monster images
-    hero_image = load_image("hero", hero.class_name)  # Accès via un attribut `class_name`
+    hero_image = load_image("hero", hero.name)  # Accès via un attribut `class_name`
     monster_image = load_image("monster", monster.name)
 
     # Display hero image (if loaded)
